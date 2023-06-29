@@ -1,0 +1,235 @@
+/* seletor universal, onde as propriedades vão ser usadas em todos os componentes*/
+* {
+  /* medida da caixa vai estar nos limites do tamanho estabelecido, contando os paddinds ou qualquer borda */
+  box-sizing: border-box;
+  /* vai tirar o padding e a margin padrão dos navegadores */
+  padding: 0;
+  margin: 0;
+}
+
+/* Seleciona o elemento raiz do documento: <html> no caso do HTML */
+/* O :root pode ser útil para declarar uma variável CSS global: */
+:root {
+  /* setando variaveis para as variaveis que vão mudar com a troca dos temas dark e light **/
+  --solid-color: white;
+  --bg-url: url(./assets/bg-mobile.jpg);
+  --stroke-color: rgba(255, 255, 255, 0.5);
+  --surface-color: rgba(255, 255, 255, 0.1);
+  --surface-color-hover: rgba(255, 255, 255, 0.05);
+  --hilight-color: rgba(255, 255, 255, 0.1);
+  --switch-bg-url: url(./assets/MoonStars.svg);
+}
+
+.light {
+  --solid-color: black;
+  --bg-url: url(./assets/bg-mobile-light.jpg);
+  --stroke-color: rgba(0, 0, 0, 0.5);
+  --surface-color: rgba(0, 0, 0, 0.05);
+  --surface-color-hover: rgba(0, 0, 0, 0.02);
+  --hilight-color: rgba(0, 0, 0, 0.1);
+  --switch-bg-url: url(./assets/Sun.svg);
+}
+body {
+  /* usando variaveis usando o var(--variavel) **/
+  background: var(--bg-url);
+  /* background cobre tudo **/
+  background-size: cover;
+  /* background sem repetição **/
+  background-repeat: no-repeat;
+  /* altura que vai cobrir toda a altura do dispositivo  */
+  height: 100vh;
+}
+
+/* fonts setadas apenas nos componentes dentro do body */
+body * {
+  font-family: "Inter", sans-serif;
+  color: var(--solid-color);
+}
+
+/* Box Container */
+#container {
+  /* width em 100% deixa a largura dinâmica */
+  width: 100%;
+  /* define a largura máxima */
+  max-width: 36.75rem;
+  /* top 56px, right auto, bottom 0,  left auto */
+  margin: 3.5rem auto 0;
+  /* padding de 25px nas laterias */
+  padding: 0 1.5rem;
+}
+
+/* Profile */
+#profile {
+  /* faz com que não seja preciso colocar o display block nos elementos filhos inline */
+  text-align: center;
+  padding: 1.5rem;
+}
+
+#profile img {
+  width: 7rem;
+}
+
+#profile p {
+  font-weight: 500;
+  line-height: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+/* Switch */
+#switch {
+  width: 4rem;
+  margin: 0.25rem auto;
+  /* restringe o posicionamento top,left,right e bottom do botão à área do switch */
+  position: relative;
+}
+
+#switch button {
+  width: 2rem;
+  height: 2rem;
+  background: white var(--switch-bg-url) no-repeat center;
+  border: 0;
+  border-radius: 50%;
+
+  /* Colocando itens sobrepostos */
+
+  /* position absolute faz uma sobreposição de camadas*/
+  position: absolute;
+  /* bota o button na camada superior */
+  z-index: 1;
+  /* alinhando à direita por default */
+  left: 0;
+  /* top e transform vão posicionar o elemento no meio da track */
+  top: 50%;
+  transform: translateY(-50%);
+
+  /* movimenta o botão usando as configurações do keyframes, com 0.2s de delay.*/
+  animation: slide-back 0.2s;
+}
+
+#switch button:hover {
+  outline: 0.5rem solid var(--hilight-color);
+}
+
+#switch span {
+  display: block;
+  width: 4rem;
+  height: 1.5rem;
+  border: 1px solid var(--stroke-color);
+  border-radius: 624.93rem;
+  background: var(--surface-color);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.light #switch button {
+  /* movimenta o botão usando as configurações do keyframes, com 0.2s de delay. O forwards
+  é necessário para o switch não voltar para a posição inicial  */
+  animation: slide-in 0.2s forwards;
+}
+
+/* Social Links */
+
+ul {
+  /* faz com que o elemento ocupe todo o espaço disponivel */
+  display: flex;
+  /* direção do flex */
+  flex-direction: column;
+  /* tira os marcadores da lista */
+  list-style: none;
+  /* espaçamento entre os componentes */
+  gap: 1rem;
+  /* */
+  padding: 1.5rem 0;
+}
+
+ul li a {
+  display: flex;
+  /* justify-content e o display flex ficam habilitados depois de usar o display flex */
+  justify-content: center;
+  align-items: center;
+
+  height: 3.5rem;
+  padding: 1rem 1.5rem;
+
+  background: var(--surface-color);
+  /* deixa um pouco embaçado o botão */
+  backdrop-filter: blur(0.25rem);
+  /* compatibilidade do filtro para browsers antigos */
+  -webkit-backdrop-filter: blur(4px);
+
+  border: 1px solid var(--stroke-color);
+  /* bordas arredondadas */
+  border-radius: 0.5rem;
+
+  /* tira a linha do elemento*/
+  text-decoration: none;
+  /* a partir de 400 é considerada negrito */
+  font-weight: 500;
+  /* primeira propriedade do transition é o que vai transicionar e a segunda é o delay */
+  transition: background 0.2s;
+}
+
+/* pseudo-selector que define o que irá mudar ao se passar o mouse emcima (hover) */
+ul li a:hover {
+  background: var(--surface-color-hover);
+  border: 1.5px solid var(--solid-color);
+}
+
+#social-links {
+  display: flex;
+  justify-content: center;
+  padding: 1.5rem 0;
+  font-size: 1.5rem;
+}
+
+#social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  border-radius: 50%;
+  transition: background 0.2s;
+}
+
+#social-links a:hover {
+  background: var(--hilight-color);
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 1.5rem 0;
+  font-size: 0.875rem;
+}
+
+/* media queries, muda o plano de fundo de acordo com o tipo de dispositivo (celular ou desktop) */
+
+@media (min-width: 43.75rem) {
+  :root {
+    --bg-url: url(./assets/bg-desktop.jpg);
+  }
+
+  .light {
+    --bg-url: url(./assets/bg-desktop-light.jpg);
+  }
+}
+
+/* keyframes , adiciona animações ao botão */
+
+@keyframes slide-in {
+  from {
+    left: 0;
+  }
+  to {
+    left: 50%;
+  }
+}
+
+@keyframes slide-back {
+  from {
+    left: 50%;
+  }
+  to {
+    left: 0;
+  }
+}
